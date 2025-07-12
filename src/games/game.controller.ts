@@ -2,6 +2,7 @@ import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
 import { GameService } from './game.service';
+import { string } from 'joi';
 
 @Controller('games')
 export class GameController {
@@ -27,9 +28,14 @@ startGame(@Param('id') id: string) {
 return this.gamesService.startGame(+id);
 }
 
-
 @Patch(':id/end')
 endGame (@Param('id') id: string, @Body() updateGameDto: UpdateGameDto) {
 return this.gamesService.endGame(+id, updateGameDto);
+}
+
+
+@Get(':id/status')
+statusGame (@Param('id') id: string) {
+  return this.gamesService.getUsersStatusByGame(+id);
 }
 }

@@ -1,4 +1,6 @@
-import { Table, Model, DataType, Column } from "sequelize-typescript";
+import { Table, Model, DataType, Column, BelongsTo, BelongsToMany } from "sequelize-typescript";
+import { User } from "src/users/entities/user.entity";
+import { GamePlayer } from "./game-player.entity";
 
 @Table
 export class Game extends Model {
@@ -14,12 +16,6 @@ name: string;
     })
      maxPlayers: number;
 
- @Column({
-        type: DataType.ARRAY(DataType.STRING),
-        defaultValue: [],
-    })
-     players: string[];
-
      @Column({
         type: DataType.ENUM('waiting', 'in_progress', 'finished'),
         defaultValue: 'waiting',
@@ -29,7 +25,11 @@ name: string;
     @Column({
         type: DataType.JSONB,
         allowNull: true,
+        defaultValue: true,
     })
 score: Record<string, number>;
+
+@BelongsToMany(() => User, () => GamePlayer)
+players: User[]; 
 }
 

@@ -1,4 +1,4 @@
-import { IsOptional, IsString, IsObject } from 'class-validator';
+import { IsOptional, IsString, IsObject, IsInt } from 'class-validator';
 
 export class UpdateGameDto {
   @IsOptional()
@@ -8,4 +8,8 @@ export class UpdateGameDto {
   @IsOptional()
   @IsObject()
   score?: Record<string, number>;
+
+@IsOptional()
+@IsInt()
+userId?: number;
 }

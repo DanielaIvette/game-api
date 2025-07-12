@@ -1,4 +1,5 @@
 import { IsArray, IsEnum, IsInt, IsNotEmpty, IsObject, IsOptional, isString, IsString, Min } from "class-validator";
+import { IsIn } from "sequelize-typescript";
 
 export enum GameState {
 WAITING = 'waiting',
@@ -15,9 +16,9 @@ export class CreateGameDto {
     @Min(2)
     maxPlayers: number;
 
-    @IsString()
+    @IsInt()
     @IsOptional()
-    playerName?: string;
+    userId?: number;
 
     @IsEnum(GameState)
     @IsOptional()
