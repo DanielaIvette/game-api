@@ -33,7 +33,6 @@ endGame (@Param('id') id: string, @Body() updateGameDto: UpdateGameDto) {
 return this.gamesService.endGame(+id, updateGameDto);
 }
 
-
 @Get(':id/status')
 statusGame (@Param('id') id: string) {
   return this.gamesService.getUsersStatusByGame(+id);

@@ -49,10 +49,6 @@ return newUser;
     console.log('Usuarios encontrados:', users);
     return users;
   } catch (error) {
-    console.error('Error en UsersService.findAll:');
-    console.error('Nombre:', error.name);
-    console.error('Mensaje:', error.message);
-    console.error('Stack:\n', error.stack);
     throw error;
   }
 }

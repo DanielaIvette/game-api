@@ -10,7 +10,7 @@ import { User } from 'src/users/entities/user.entity';
 
 @Module({
   controllers: [GameController],
-  providers: [GameService],
+  providers: [GameService, UsersService],
   imports: [ SequelizeModule.forFeature([Game, GamePlayer, User]), UsersModule],
 })
 export class GameModule {}

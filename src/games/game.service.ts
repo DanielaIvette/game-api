@@ -147,44 +147,21 @@ throw new InternalServerErrorException ('Something went very wrong!');
 
 async getUsersStatusByGame(gameId: number) {
   try {
-    const playerStatuses = await this.gamePlayerModel.findAll({
-      where: { gameId },
+    const playerStatuses = await this.gameModel.findAll({
+      where: { id: gameId },
       include: [
         {
           model: User,
           attributes: ['id', 'fullname', 'email'],
           required: true, 
+          through: {
+            attributes: []
+          }
         },
       ],
     });
-    console.log('📦 playerStatuses:', JSON.stringify(playerStatuses, null, 2));
-
-    const groupedByStatus: { [key: string]: SimpleUser[] } = {
-  waiting: [],
-  in_progress: [],
-  finished: [],
-};
-
-for (const record of playerStatuses) {
-  const user = record.user;
-  if (!user) continue;
-
-  const userInfo: SimpleUser = {
-    id: user.id,
-    fullname: user.fullname,
-    email: user.email,
-  };
-
-  const key = record.status?.trim();
-
-  if (groupedByStatus[key]) {
-    console.log(`🎯 Pushing ${user.fullname} into "${key}" group`);
-    groupedByStatus[key].push(userInfo);
-  } else {
-    console.warn(`🚧 No se reconoció status: "${key}"`);
-  }
-}
-    return groupedByStatus;
+    return playerStatuses
+    
   } catch (error) {
     console.error('Error en getUsersStatusByGame:', error);
     throw new InternalServerErrorException('Error obteniendo el estado de los jugadores');
