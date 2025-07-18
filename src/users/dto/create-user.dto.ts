@@ -1,9 +1,7 @@
-import { IsBoolean, IsOptional, IsString, MinLength }  from "class-validator";
+import { IsOptional, IsString, MinLength }  from "class-validator";
 import { IsEmail } from "class-validator";
 
 export class CreateUserDto {
-
-
     @IsString()
     @MinLength(3)
     fullname: string;
@@ -11,7 +9,7 @@ export class CreateUserDto {
     @IsEmail()
     email: string; 
 
-@IsBoolean()
-@IsOptional() 
-isActive_bool?: boolean;
+@IsString()
+@MinLength(8) 
+password: string;
 }

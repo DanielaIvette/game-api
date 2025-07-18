@@ -3,9 +3,13 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { GameModule } from './games/game.module';
 import { envs } from './config/envs'; 
 import { UsersModule } from './users/users.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+     ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     GameModule,
     SequelizeModule.forRoot({
       dialect: 'postgres',
